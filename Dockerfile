@@ -1,4 +1,4 @@
-# unlike 3.12-slim has no vulnerabilities according to docker-hub
+# unlike 3.12-slim, 3.11 has no vulnerabilities according to docker-hub
 FROM python:3.11-slim
 
 # Set working directory
