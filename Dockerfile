@@ -11,4 +11,4 @@ RUN pip install -r requirements.txt
 
 # Expose port and run the app
 EXPOSE 5000
-CMD ["python", "app.py"]
+CMD ["python", "catfact.py"]
