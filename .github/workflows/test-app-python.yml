@@ -38,6 +38,7 @@ jobs:
     # Test REST API Endpoints
     - name: Test REST API Endpoints
       run: |
+        kubectl get svc cat-fact-service -o=jsonpath='{.spec.ports[0].nodePort}'
         SVC_PORT=$(kubectl get svc cat-fact-service -o=jsonpath='{.spec.ports[0].nodePort}')
         SITE=$(minikube ip)
         curl -f http://SITE:SVC_PORT/
