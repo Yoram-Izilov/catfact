@@ -26,39 +26,18 @@ jobs:
         kubernetes version: 'v1.26.3'
         driver: docker
 
-
-    # Step 5: Add catfacts.local to Hosts
+    # Add catfacts.local to Hosts
     - name: Add catfacts.local to Hosts
       run: echo "$(minikube ip) catfacts.local" | sudo tee -a /etc/hosts
 
-    # Step 6: Deploy the Helm Chart
+    # Deploy the Helm Chart
     - name: Deploy Helm Chart
       run: |
         helm install cat-fact-app ./chart
         kubectl rollout status deployment/cat-fact-app
 
-    # Step 7: Debug Deployment
-    - name: Debug Deployment
-      run: |
-        kubectl get all
-        kubectl describe pod -l app=cat-fact-app
-        kubectl logs -l app=cat-fact-app
-
-    # Step 8: Test REST API Endpoints
+    # Test REST API Endpoints
     - name: Test REST API Endpoints
       run: |
-        curl -f http://catfacts.local:80/ || exit 1
-        curl -f http://catfacts.local:80/health || exit 1
-
-    # # Get Minikube's IP and update /etc/hosts
-    # - name: Update /etc/hosts for catfacts.local
-    #   run: |
-    #     MINIKUBE_IP=$(minikube ip)
-    #     echo "$MINIKUBE_IP catfacts.local" | sudo tee -a /etc/hosts
-
-    # # Run Tests on REST API
-    # - name: Test REST API Endpoints
-    #   shell: bash
-    #   run: |
-    #     curl -f http://catfacts.local:80/ || exit 1
-    #     curl -f http://catfacts.local:80/health || exit 1
+        curl -f http://catfacts.local:80/
+        curl -f http://catfacts.local:80/health
