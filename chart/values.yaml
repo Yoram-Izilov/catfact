@@ -1,0 +1,38 @@
+# deployment values
+appName: cat-fact-app
+replicaCount: 1
+image:
+  name: cat-fact-image
+  tag: latest
+containerPort: 5000
+
+resources:
+  limits:
+    cpu: 100m
+    memory: 128Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
+livenessProbe:
+  httpGet:
+    path: /health
+    port: http
+readinessProbe:
+  httpGet:
+    path: /
+    port: http
+
+# service values
+service:
+  name: cat-fact-service
+  type: NodePort
+  port: 80
+  targetPort: 5000
+
+# ingress values 
+ingress:
+  name: cat-fact-ingress
+  host: catfacts.local
+  rewriteTarget: /
+  path: /
+  pathType: Prefix
