@@ -2,7 +2,7 @@
 appName: cat-fact-app
 replicaCount: 1
 image:
-  name: cat-fact-image
+  name: nerdfromhell/cat-fact-image
   tag: latest
 containerPort: 5000
 
