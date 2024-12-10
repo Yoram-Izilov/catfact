@@ -32,6 +32,7 @@ jobs:
         helm install cat-fact-app ./chart
         MINIKUBE_IP=$(minikube ip)
         echo "$MINIKUBE_IP catfacts.local" | sudo tee -a /etc/hosts
+        cat /etc/hosts
         curl -f http://catfacts.local:80/ || exit 1
         curl -f http://catfacts.local:80/health || exit 1
 
