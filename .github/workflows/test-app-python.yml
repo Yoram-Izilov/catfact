@@ -31,11 +31,15 @@ jobs:
       run: |
         helm install cat-fact-app ./chart
 
+    # Get Minikube's IP and update /etc/hosts
+    - name: Update /etc/hosts for catfacts.local
+      run: |
+        MINIKUBE_IP=$(minikube ip)
+        echo "$MINIKUBE_IP catfacts.local" | sudo tee -a /etc/hosts
+
     # Run Tests on REST API
     - name: Test REST API Endpoints
       shell: bash
       run: |
-        POD_IP=$(kubectl get pod -l app=cat-fact-app -o jsonpath="{.items[0].status.podIP}")
-        echo "Pod IP: $POD_IP"
-        curl -f http://$POD_IP:80/ || exit 1
-        curl -f http://$POD_IP:80/health || exit 1
+        curl -f http://catfacts.local:80/ || exit 1
+        curl -f http://catfacts.local:80/health || exit 1
