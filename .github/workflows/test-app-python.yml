@@ -41,7 +41,9 @@ jobs:
         minikube service list
         minikube service cat-fact-service --url
         echo "------------------opening the service------------------"
-        curl $(minikube service cat-fact-service --url) 
+        kubectl port-forward svc/cat-fact-service 8080:80 &
+        sleep 5  # Wait a bit for port forwarding to be established
+        curl http://localhost:8080 
     # SVC_PORT=$(kubectl get svc cat-fact-service -o=jsonpath='{.spec.ports[0].nodePort}')
     # SITE=$(minikube ip)
     # curl -f https://google.com/
