@@ -32,9 +32,7 @@ jobs:
         helm install cat-fact-app ./chart
         MINIKUBE_IP=$(minikube ip)
         echo "$MINIKUBE_IP catfacts.local" | sudo tee -a /etc/hosts
-
-    - name: Check Pod Status
-      run: kubectl get pods -l app=cat-fact-app -o wide
+        kubectl get pods -l app=cat-fact-app -o wide
 
 
     # # Get Minikube's IP and update /etc/hosts
