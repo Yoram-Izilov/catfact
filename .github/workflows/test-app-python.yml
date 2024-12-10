@@ -34,7 +34,6 @@ jobs:
     - name: Deploy Helm Chart
       run: |
         helm install cat-fact-app ./chart
-        kubectl wait --for=condition=ready pod -l app=cat-fact-app
 
     # Test REST API Endpoints
     - name: Test REST API Endpoints
