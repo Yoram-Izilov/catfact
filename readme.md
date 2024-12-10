@@ -12,4 +12,4 @@ docker build -t cat-fact-image .
 docker run -d -p 5000:5000 cat-fact-image
 ```
 
-minikube image load cat-fact-app:latest
+# 

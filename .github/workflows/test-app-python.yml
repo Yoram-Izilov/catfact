@@ -44,8 +44,14 @@ jobs:
         kubectl port-forward svc/cat-fact-service 8080:80 &
         sleep 5  # Wait a bit for port forwarding to be established
         curl http://localhost:8080 
+
+    ## option 1
+    # curl -f http://catfacts.local/
+    # curl -f http://catfacts.local/health
+    ## option 2
     # SVC_PORT=$(kubectl get svc cat-fact-service -o=jsonpath='{.spec.ports[0].nodePort}')
     # SITE=$(minikube ip)
-    # curl -f https://google.com/
     # curl -f http://$SITE:$SVC_PORT/
     # curl -f http://$SITE:$SVC_PORT/health
+
+
