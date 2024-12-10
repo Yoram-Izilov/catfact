@@ -16,11 +16,7 @@ resources:
 livenessProbe:
   httpGet:
     path: /health
-    port: 5000  
-readinessProbe:
-  httpGet:
-    path: /
-    port: 5000  
+    port: 5000
 
 # service values
 service:
