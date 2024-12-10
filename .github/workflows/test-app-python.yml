@@ -37,10 +37,22 @@ jobs:
         MINIKUBE_IP=$(minikube ip)
         echo "$MINIKUBE_IP catfacts.local" | sudo tee -a /etc/hosts
 
+
+    
+    
+    # Debug Helm Deployment
+    - name: Check Helm Release
+      run: |
+        helm list --namespace my-namespace
+        helm status cat-fact-app --namespace my-namespace
+
+    # Debug Kubernetes Pods
+    - name: List All Pods
+      run: kubectl get pods --all-namespaces
+
     # Run Tests on REST API
     - name: Test REST API Endpoints
       shell: bash
       run: |
-        kubectl get pods
         curl -f http://catfacts.local:80/ || exit 1
         curl -f http://catfacts.local:80/health || exit 1
