@@ -41,5 +41,6 @@ jobs:
     - name: Test REST API Endpoints
       shell: bash
       run: |
+        kubectl get pods
         curl -f http://catfacts.local:80/ || exit 1
         curl -f http://catfacts.local:80/health || exit 1
