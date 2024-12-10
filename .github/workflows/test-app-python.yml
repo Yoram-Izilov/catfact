@@ -34,10 +34,11 @@ jobs:
     - name: Deploy Helm Chart
       run: |
         helm install cat-fact-app ./chart
-        kubectl rollout status deployment/cat-fact-app
 
     # Test REST API Endpoints
     - name: Test REST API Endpoints
       run: |
-        curl -f http://catfacts.local:80/
-        curl -f http://catfacts.local:80/health
+        SVC_PORT=$(kubectl get svc cat-fact-service -o=jsonpath='{.spec.ports[0].nodePort}')
+        SITE=$(minikube ip)
+        curl -f http://SITE:SVC_PORT/
+        curl -f http://SITE:SVC_PORT/health
